@@ -10,6 +10,8 @@ public class ball : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public float launchSpeed = 100;
+
+    [Range(0f, 90f)]
     public float deflectionAngle = 90;
 
    public BlockManager blockmanager;
