@@ -29,6 +29,7 @@ public class ball : MonoBehaviour
             Destroy(collision.gameObject);
 
             blockmanager.blocksDestroyed++;
+            Debug.Log("Blocks Broken: " + blockmanager.blocksDestroyed);
         }
 
          if (collision.gameObject.CompareTag("Player"))
