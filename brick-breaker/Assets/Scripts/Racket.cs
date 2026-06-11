@@ -36,6 +36,18 @@ public class Racket : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        
+        if (!Input.gyro.enabled)
+        {
+
+
+            Input.gyro.enabled = true;
+        }
+
+
+    }
 
 
 
@@ -54,15 +66,61 @@ public class Racket : MonoBehaviour
         
         //Move player horizontally
         float moveX = Input.GetAxis("Horizontal") * speed;
+  
+
+        float screenCentre = Screen.width / 2;
+
+        for (int i = 0; i< Input.touchCount; i++)
+        {
+
+            Touch touch = Input.GetTouch(i);
+
+
+            if (touch.position.x <  screenCentre)
+            {
+
+                moveX -= speed;
+
+
+            }
+            else
+            {
+
+
+                moveX += speed;
+
+            }
+
+
+
+
+
+        }
+
+        Quaternion gyroQuat = Input.gyro.attitude;
+
+        Vector3 euler = gyroQuat.eulerAngles;
+
+
+        float z = euler.z;
+
+        Debug.Log($"Orientation: {euler}");
+
+
+        if (z > 180)
+        {
+
+            z -*+= 360;
+
+
+        }
+
+
+        moveX += z / 60f * speed;
+
+
+
         body.linearVelocityX = moveX;
-
-
-
-
-
-
-
-
 
     }
 }
